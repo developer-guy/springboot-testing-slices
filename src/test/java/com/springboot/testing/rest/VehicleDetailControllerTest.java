@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -67,8 +68,8 @@ public class VehicleDetailControllerTest {
         //when-then
         MvcResult mvcResult = this.mvc.perform(MockMvcRequestBuilders.get("/vehicles/{id}", 1l)).
                 andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andReturn();
-        String location = mvcResult.getResponse().getHeader("Location");
-        assertThat(location).isNotEmpty();
+        String location = mvcResult.getResponse().getHeader(HttpHeaders.LOCATION);
+        assertThat(location).contains("/vehicles/1/1");
     }
 
     @Test
