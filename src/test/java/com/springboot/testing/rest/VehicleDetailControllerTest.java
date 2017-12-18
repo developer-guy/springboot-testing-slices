@@ -63,7 +63,7 @@ public class VehicleDetailControllerTest {
         VehicleDetail vehicleDetail = new VehicleDetail(1l, "Ford", "Focus");
         given(this.vehicleDetailsService.findById(anyLong())).willReturn(vehicleDetail);
         //when-then
-        this.mvc.perform(MockMvcRequestBuilders.get("/vehicles/" + 1l)).
+        this.mvc.perform(MockMvcRequestBuilders.get("/vehicles/{id}", 1l)).
                 andExpect(MockMvcResultMatchers.status().isOk()).
                 andExpect(MockMvcResultMatchers.jsonPath("$.make", is("Ford")));
     }
