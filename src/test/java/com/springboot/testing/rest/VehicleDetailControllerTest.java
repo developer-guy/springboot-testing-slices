@@ -35,9 +35,11 @@ public class VehicleDetailControllerTest {
     @MockBean
     private VehicleDetailsService vehicleDetailsService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Test
     public void is_vehicledetails_saved_successfully() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         String vehicleDetailsJson = objectMapper.writeValueAsString(new VehicleDetail(null, "Ford", "Focus"));
         //given
         given(this.vehicleDetailsService.save(any())).willReturn(new VehicleDetail(1l, "Ford", "Focus"));
